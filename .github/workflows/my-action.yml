@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: run_script
-        run : |
-          echo "Hello. I'm your first action"
-          sh run_tests.sh
+      - name: print Hello
+        run : echo "Hello. I'm your first action"
+
+      - name: run script
+        run: ls -la
