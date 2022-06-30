@@ -9,25 +9,37 @@ pass=0
 fail=0
 array=()
 
-if [[ "$1" == "-r" ]]; then
-    x=`find . -name run.sh`
-    array+=( "$x" )
-    for f in ${array[@]}; do
-        sh $f > "${f%/*}/testname.log"
-        if [[ "$?" -eq 0 ]]; then
-            ((pass++))
-        else
-            ((fail++))
-        fi
-    done
-elif [[ "$1" == "-c" ]]; then
+function_remove() {
     x=`find . -name testname.log`
-    array+=( "$x" )
+    local array+=( "$x" )
     for f in ${array[@]}; do
         rm $f
     done
     echo "Done: Removed all testname.log files"
+}
+
+log_array=()
+if [[ "$1" == "-r" ]]; then
+    function_remove
+    x=`find . -name run.sh`
+    array+=( "$x" )
+    for f in ${array[@]}; do
+        file_name="${f%/*}/testname.log"
+        while IFS= read -r line
+        do
+            $line >> $file_name 2>&1
+            if [[ "$?" -eq "0" ]]; then
+                ((pass++))
+            else
+                ((fail++))
+            fi
+        done < $f
+    done
+elif [[ "$1" == "-c" ]]; then
+    function_remove
     exit 0;
+elif [[ "$1" == "-d" ]]; then
+    rm -r "./tests"
 else
     echo "Error: Uncknown parameter"
     exit 0;
