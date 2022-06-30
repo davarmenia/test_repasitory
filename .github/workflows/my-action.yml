@@ -12,10 +12,13 @@ jobs:
 
     steps:
       - name: print Hello
-        run : echo "Hello. I'm your first action"
+        run: echo "Hello. I'm your first action"
         
       - name: Checkout the sources
         uses: actions/checkout@v2
 
-      - name: run script
+      - name: show files and directories
         run: ls -la
+      
+      - name: run script
+        run: sh run_tests.sh
