@@ -21,4 +21,4 @@ jobs:
         run: ls -la
       
       - name: run script
-        run: sh run_tests.sh
+        run: sh run_tests.sh -r
