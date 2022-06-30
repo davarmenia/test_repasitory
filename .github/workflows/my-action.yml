@@ -24,3 +24,14 @@ jobs:
         run: |
           chmod +x run_tests.sh
           ./run_tests.sh -r
+
+      - name: show result on folders
+        run: tree
+        
+      - name: run script
+        run: |
+          chmod +x run_tests.sh
+          ./run_tests.sh -c
+          
+      - name: show result on folders
+        run: tree
