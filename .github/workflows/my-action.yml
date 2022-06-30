@@ -2,7 +2,7 @@ name: my-first-action
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "dev" ]
 
   workflow_dispatch:
 
@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: print Hello
         run : echo "Hello. I'm your first action"
+        
+      - name: Checkout the sources
+        uses: actions/checkout@v2
 
       - name: run script
         run: ls -la
