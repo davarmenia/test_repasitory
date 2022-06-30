@@ -1,0 +1,17 @@
+name: my-first-action
+
+on:
+  push:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  my_testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: run_script
+        run : |
+          echo "Hello. I'm your first action"
+          sh run_tests.sh
