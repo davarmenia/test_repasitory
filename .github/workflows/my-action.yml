@@ -21,4 +21,6 @@ jobs:
         run: ls -la
       
       - name: run script
-        run: ./run_tests.sh -r
+        run: |
+          chmod +x run_tests.sh
+          ./run_tests.sh -r
