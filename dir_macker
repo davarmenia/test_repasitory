@@ -1,0 +1,26 @@
+#!/bin/bash
+
+FILE=/etc/resolv.conf
+
+for i in {1..5}
+do
+
+    if [ ! -d "./tests" ]; then
+        mkdir "./tests"
+    fi
+
+    if [ ! -d "./tests/t$i" ]; then
+        mkdir "./tests/t$i"
+    fi
+
+    echo "echo This is file $i" > ./tests/t$i/run.sh
+    if [ "$i" == 3 ];then
+        echo "datark" >> ./tests/t$i/run.sh
+    else
+        echo "date" >> ./tests/t$i/run.sh
+    fi
+    echo "echo executed file $i info" >> ./tests/t$i/run.sh
+
+done
+
+
