@@ -24,16 +24,20 @@ if [[ "$1" == "-r" ]]; then
     x=`find . -name run.sh`
     array+=( "$x" )
     for f in ${array[@]}; do
+        choose_script_fail=false
         file_name="${f%/*}/testname.log"
         while IFS= read -r line
         do
             $line >> $file_name 2>&1
-            if [[ "$?" -eq "0" ]]; then
-                ((pass++))
-            else
-                ((fail++))
+            if [[ "$?" -ne "0" ]]; then
+                choose_script_fail=true
             fi
         done < $f
+        if [ "$choose_script_fail" = true ]; then
+            ((fail++))
+        else
+            ((pass++))
+        fi
     done
 elif [[ "$1" == "-c" ]]; then
     function_remove
