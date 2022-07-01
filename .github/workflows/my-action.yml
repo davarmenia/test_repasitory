@@ -1,9 +1,6 @@
 name: my-first-action
 
 on:
-  push:
-    branches: [ "dev" ]
-
   workflow_dispatch:
 
 jobs:
@@ -16,22 +13,16 @@ jobs:
         
       - name: Checkout the sources
         uses: actions/checkout@v2
-
-      - name: show files and directories
-        run: ls -la
+        
+      - name: macking test files
+        run: |
+          chmod +x dir_macker
+          ./dir_macker
       
       - name: run script
         run: |
           chmod +x run_tests.sh
           ./run_tests.sh -r
 
-      - name: show result on folders
-        run: tree
-        
-      - name: run script
-        run: |
-          chmod +x run_tests.sh
-          ./run_tests.sh -c
-          
       - name: show result on folders
         run: tree
